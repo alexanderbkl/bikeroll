@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\SaveProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,13 +32,25 @@ class ProjectController extends Controller
             'project' => new Project
         ]);
     }
-    public function store(CreateProjectRequest $request)
+    public function store(SaveProjectRequest $request)
     {
 
-        Project::create(request()->validated());
+        Project::create($request->validated());
 
         //return redirect()->route('projects.show', $project);
         return redirect()->route('projects.index');
+    }
+    public function edit(Project $project)
+    {
+        return view('projects.edit', [
+            'project' => $project
+        ]);
+    }
+    public function update(Project $project, SaveProjectRequest $request)
+    {
+
+        $project->update($request->validated());
+        return redirect()->route('projects.show', $project);
     }
 
  

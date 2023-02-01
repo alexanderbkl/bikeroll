@@ -3,7 +3,7 @@
 @section('title', 'Create project')
 
 @section('content')
-    <h1>Create new project</h1>
+    <h1>Edit project</h1>
 
     @if($errors->any())
         <ul>
@@ -13,24 +13,24 @@
         </ul>
     @endif
 
-    <form method="POST" action="{{ route('projects.store') }}">
-        @csrf
+    <form method="POST" action="{{ route('projects.update', $project) }}">
+        @csrf @method('PATCH')
         <label>
             Title
-            <input type="text" name="title" value="{{old('title')}}">
+            <input type="text" name="title" value="{{old('title', $project->title)}}">
         </label>
         <br>
         <label>
             URL
-            <input type="text" name="url" value="{{old('url')}}">
+            <input type="text" name="url" value="{{old('url', $project->url)}}">
         </label>
         <br>
         <label>
             Description
-            <textarea type="text" name="description">{{old('description')}}</textarea>
+            <textarea type="text" name="description">{{old('description', $project->description)}}</textarea>
         </label>
         <br>
-        <button>Save</button>
+        <button>Update</button>
     </form>
     
 @endsection
