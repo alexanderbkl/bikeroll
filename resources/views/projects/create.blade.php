@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Create new project</h1>
+    
 
     @include('partials.validation-errors')
 
