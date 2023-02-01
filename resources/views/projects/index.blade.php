@@ -9,7 +9,7 @@
     <ul>
         @forelse ($projects as $project)
             <li><a href="{{route('projects.show', $project)}}">{{ $project->title }}</a>
-                <br><small>{{ $project->description }}</small> <br> Editado hace {{ $project->updated_at->diffForHumans() }}</li>
+                <br><small>{{ $project->description }}</small> <br> Editado {{ $project->updated_at->diffForHumans() }}</li>
         @empty
             <li>No project items</li>
         @endforelse
