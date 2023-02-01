@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,19 +32,10 @@ class ProjectController extends Controller
             'project' => new Project
         ]);
     }
-    public function store()
+    public function store(CreateProjectRequest $request)
     {
-        /*
-        Project::create([
-            'title' => request('title'),
-            'url' => request('url'),
-            'description' => request('description')
-        ]);*/
-        Project::create(request()->validate([
-            'title' => 'required',
-            'url' => 'required',
-            'description' => 'required'
-        ]));
+
+        Project::create(request()->validated());
 
         //return redirect()->route('projects.show', $project);
         return redirect()->route('projects.index');
