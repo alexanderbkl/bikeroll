@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProjectController;
 
@@ -38,3 +39,9 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->nam
 Route::view('/contact', 'contact')->name('contact');
 
 Route::post('contact', [MessageController::class, 'messages.store']);
+
+//Auth::routes(['register' => false]);
+Auth::routes();
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
