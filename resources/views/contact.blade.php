@@ -1,22 +1,54 @@
 @extends('layout')
 
+
 @section('content')
-    <h1>Contact</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-10 col-lg-6 mx-auto">
 
-    @include('partials.session-status')
-        <form method="POST" action={{ route('messages.store') }}>
+       
+
+        <form class="bg-white shadow rounded py-3 px-4" 
+        method="POST"
+         action="{{ route('messages.store') }}">
             @csrf
-            <input name="name" placeholder="Name" value="{{ old('name') }}"><br>
-            {!! $errors->first('name', '<small>:message</small>') !!}<br>
+            <h1 class="display-4">Contact</h1>
 
-            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}"><br>
-            {!! $errors->first('email', '<small>:message</small>') !!}<br>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control bg-light shadow-sm border-0" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                @error('name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
 
-            <input name="subject" placeholder="Subject" value="{{ old('subject') }}"><br>
-            {!! $errors->first('subject', '<small>:message</small>') !!}<br>
+            <div class="form-group">
+                <label for="email">e-mail</label>
+                <input class="form-control bg-light shadow-sm border-0" type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}"><br>
+                @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
 
-            <textarea name="content" placeholder="Message">{{ old('content') }}</textarea><br>
-            {!! $errors->first('content', '<small>:message</small>') !!}<br>
-            <button>Send</button>
+            
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input class="form-control bg-light shadow-sm border-0" id="subject" name="subject" placeholder="Subject" value="{{ old('subject') }}"><br>
+                @error('subject')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+                
+            <div class="form-group">
+                <label for="content">e-mail</label>
+                <textarea class="form-control bg-light shadow-sm border-0" id="content" name="content" placeholder="Message">{{ old('content') }}</textarea><br>
+                @error('content')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+                <button class="btn btn-primary btn-lg">Send</button>
         </form>
+    </div>
+</div>
+    </div>
+
 @endsection
