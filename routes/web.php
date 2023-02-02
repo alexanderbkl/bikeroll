@@ -21,7 +21,9 @@ use App\Http\Controllers\ProjectController;
 Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
 
-Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project'])->names('projects');
+Route::resource('projects', ProjectController::class)
+->parameters(['projects' => 'project'])
+->names('projects');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

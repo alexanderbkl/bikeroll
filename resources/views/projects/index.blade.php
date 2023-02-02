@@ -4,8 +4,10 @@
 
 @section('content')
     <h1>Projects</h1>
-    <a href="{{ route('projects.create') }}">Create new project</a>
 
+    @auth
+        <a href="{{ route('projects.create') }}">Create new project</a>
+    @endauth
     <ul>
         @forelse ($projects as $project)
             <li><a href="{{route('projects.show', $project)}}">{{ $project->title }}</a>
