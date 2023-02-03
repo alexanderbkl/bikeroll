@@ -14,11 +14,7 @@ class ProjectController extends Controller
     {
         $this->middleware('auth')->except('index', 'show');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('projects.index', [

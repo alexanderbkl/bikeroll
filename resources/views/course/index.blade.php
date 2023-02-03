@@ -1,22 +1,22 @@
 @extends('layout')
 
-@section('title', 'Projects')
+@section('title', 'Cursajes')
 
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="display-4 mb-0">Projects</h1>
+            <h1 class="display-4 mb-0">Cursajes</h1>
             @auth
-                <a class="btn btn-primary" href="{{ route('course.create') }}">Crear nueva cursa</a>
+                <a class="btn btn-primary" href="{{ route('course.create') }}">Crear nuevo cursaje</a>
             @endauth
         </div>
         <hr>
-        <p class="lead text-secondary">Proyectos activos de montaje en bicicleta.</p>
+        <p class="lead text-secondary">Cursajes de bicicleta.</p>
         <ul class="list-group">
             @forelse ($courses as $cursa)
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
-                        href="{{ route('projects.show', $project) }}">
+                        href="{{ route('course.show', $cursa) }}">
                         <span class="font-weight-bold">
                             {{ $cursa->title }}
                         </span>
