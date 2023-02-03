@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
@@ -40,7 +41,7 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->nam
 
 Route::view('/contact', 'contact')->name('contact');
 
-Route::view('/admin', 'admin.admin')->name('admin');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 
 Route::post('contact', [MessageController::class, 'store'])->name('messages.store');
