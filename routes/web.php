@@ -40,6 +40,9 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->nam
 
 Route::view('/contact', 'contact')->name('contact');
 
+Route::view('/admin', 'admin.admin')->name('admin');
+
+
 Route::post('contact', [MessageController::class, 'store'])->name('messages.store');
 
 //Auth::routes(['register' => false]);

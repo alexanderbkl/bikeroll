@@ -56,6 +56,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <button type="button" class="btn btn-primary mx-2" onclick="location.href='{{ route('register') }}';"> {{ __('Register') }}
+                                </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
