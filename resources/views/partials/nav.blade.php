@@ -20,6 +20,16 @@
             <li class="nav-item">
                 <a class="nav-link {{ setActive('contact') }}" href="{{ route('contact') }}">Contact</a>
             </li>
+            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
+            </li>
+            @endrole
+            @role('pro')
+            <li class="nav-item">
+                <a class="nav-link {{ setActive('pro') }}" href="{{ route('contact') }}">PRO</a>
+            </li>
+            @endrole
             @auth
                 <li class="nav-item">
                     <a class="nav-link {{ setActive('logout') }}" href="#"
@@ -32,16 +42,7 @@
                     <a class="nav-link {{ setActive('login') }}" href="{{ route('login') }}">Login</a>
                 </li>
             @endguest
-            @role('admin')
-            <li class="nav-item">
-                <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
-            </li>
-            @endrole
-            @role('pro')
-            <li class="nav-item">
-                <a class="nav-link {{ setActive('pro') }}" href="{{ route('contact') }}">PRO</a>
-            </li>
-            @endrole
+
 
         </ul>
 

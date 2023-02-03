@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
@@ -25,6 +26,8 @@ Route::view('/about', 'about')->name('about');
 Route::resource('projects', ProjectController::class)
 ->parameters(['projects' => 'project'])
 ->names('projects');
+
+Route::resource('course', CourseController::class)->names('course');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

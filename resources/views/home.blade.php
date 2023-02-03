@@ -14,7 +14,7 @@
                 <p class="lead text-secondary">Proyecto realizado para IES La Pineda sobre cursos de bicicleta en Laravel.
                 </p>
                 <div class="d-flex flex-row align-items-center">
-                    <a class="btn btn-lg btn-block btn-primary" href="{{ route('projects.index') }}">Curses</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ route('projects.index') }}">Projectes</a>
                     <a class="btn btn-lg btn-block btn-outline-primary" href="{{ route('contact') }}">Contact</a>
                 </div>
             </div>
