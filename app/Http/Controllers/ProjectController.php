@@ -22,7 +22,7 @@ class ProjectController extends Controller
     public function index()
     {
         return view('projects.index', [
-            'projects' => Project::latest()->paginate()
+            'projects' => Project::latest()->paginate(5)
         ]);
     }
     public function show(Project $project)
@@ -63,5 +63,5 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('status', 'El proyecto fue eliminado con éxito');
     }
 
- 
+
 }

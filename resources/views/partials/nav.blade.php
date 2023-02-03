@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-white shadow-sm">
+<nav class="navbar navbar-expand-md bg-white shadow-sm px-3">
     <a href="{{ route('home') }}" class="navbar-brand">{{config('app.name')}}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
         <span class="navbar-toggler-icon"></span>
