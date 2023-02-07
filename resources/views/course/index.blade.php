@@ -13,15 +13,21 @@
         <hr>
         <p class="lead text-secondary">Cursajes de bicicleta.</p>
         <ul class="list-group">
-            @forelse ($courses as $cursa)
+            @forelse ($courses as $course)
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
-                        href="{{ route('course.show', $cursa) }}">
+                        href="{{ route('course.show', $course) }}">
+                        @if ($course->map_image)
+                            <img class="img-thumbnail" width="50"
+                                src="{{ asset('/uploads/courses/' . $course->map_image) }}" alt="sin imagen" />
+                        @else
+                            <p>s/i</p>
+                        @endif
                         <span class="font-weight-bold">
-                            {{ $cursa->title }}
+                            {{ $course->title }}
                         </span>
                         <span class="text-black-50">
-                            {{ $cursa->created_at->format('d/m/Y') }}
+                            {{ $course->created_at->format('d/m/Y') }}
                         </span>
                     </a>
                 </li>

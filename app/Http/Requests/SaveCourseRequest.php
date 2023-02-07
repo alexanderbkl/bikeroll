@@ -28,6 +28,9 @@ class SaveCourseRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
+
+
     public function rules()
     {
         //rules for title (string), url (string), description (string), elevation (integer), map_image_url (string), max_participants (integer), km (integer), date (date), start_point (string), poster_url (string), sponsorship_price (integer), photos_id (string)
@@ -36,7 +39,6 @@ class SaveCourseRequest extends FormRequest
             'url' => 'required',
             'description' => 'required',
             'elevation' => 'required|integer',
-            'map_image_url' => 'required',
             'max_participants' => 'required|integer',
             'km' => 'required|integer',
             'date' => 'required|date',
@@ -50,7 +52,10 @@ class SaveCourseRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'El proyecto necesita un título'
+            'title.required' => 'El proyecto necesita un título',
+            'map_image.file' => 'La imatge ha de ser un fitxer',
+            'map_image.image' => 'La imatge ha de ser una imatge',
+            'map_image.max' => 'La imatge no pot pesar més de 5MB',
         ];
     }
 }

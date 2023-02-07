@@ -24,7 +24,7 @@ la. A més de totes les fotografies que es fan.*/
             $table->string('url')->unique();
             $table->text('description');
             $table->integer('elevation');
-            $table->string('map_image_url');
+            $table->string('map_image')->nullable();
             $table->integer('max_participants');
             $table->integer('km');
             $table->dateTime('date');
@@ -35,7 +35,7 @@ la. A més de totes les fotografies que es fan.*/
             $table->timestamps();
         });
 
-        
+
     }
 
     /**
