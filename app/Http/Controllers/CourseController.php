@@ -33,10 +33,29 @@ class CourseController extends Controller
     {
 
         Course::create($request->validated());
-        return view('course.index', [
-            'courses' => Course::latest()->paginate(5)
-        ]);
-        //return redirect()->route('course.show', $course);
+
+        
+
         return redirect()->route('course.index')->with('status', 'La cursa fue creada con éxito');
+    }
+
+    public function edit(Course $course)
+    {
+        return view('course.edit', [
+            'course' => $course
+        ]);
+    }
+
+    public function update(Course $course, SaveCourseRequest $request)
+    {
+
+        $course->update($request->validated());
+        return redirect()->route('course.show', $course)->with('status', 'El cursaje fue actualizado con éxito');
+    }
+
+    public function destroy(Course $course)
+    {
+        $course->delete();
+        return redirect()->route('course.index')->with('status', 'La cursa fue eliminada con éxito');
     }
 }

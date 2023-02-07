@@ -24,8 +24,12 @@
 <!--map_image_url-->
 <div class="form-group">
     <label for="map_image_url">URL de la imatge del mapa de la cursa</label>
-    <input class="form-control border-0 bg-light shadow-sm" id="map_image_url" type="text" name="map_image_url"
-        value="{{ old('map_image_url', $course->map_image_url) }}">
+    <!--<input class="form-control border-0 bg-light shadow-sm" id="map_image_url" type="text" name="map_image_url"
+        value="{{ old('map_image_url', $course->map_image_url) }}">-->
+        <input class="form-control border-0 bg-light shadow-sm" id="map_image_url" type="text" name="map_image_url"
+        value="{{ "test.com" }}">
+        <input id="file-input" name="imagenmapa" type="file"/>
+
 </div>
 <!--max participants-->
 <div class="form-group">
