@@ -15,16 +15,13 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            /* De les curses volem saber la seva descripció,
-desnivell, imatge del mapa, número de participants màxim, km, data y hora de la
-seva celebració, punt de sortida, cartell de promoció i diners que val patrocinar-
-la. A més de totes les fotografies que es fan.*/
 
             $table->string('title');
             $table->string('url')->unique();
             $table->text('description');
             $table->integer('elevation');
             $table->string('map_image')->nullable();
+            $table->string('poster_image')->nullable();
             $table->integer('max_participants');
             $table->integer('km');
             $table->dateTime('date');
@@ -36,7 +33,19 @@ la. A més de totes les fotografies que es fan.*/
             $table->timestamps();
         });
 
-
+        //create test course
+        $course = new \App\Models\Course();
+        $course->title = 'Cursa de prova';
+        $course->url = 'cursa-de-prova';
+        $course->description = 'Descripció de cursa de prova';
+        $course->elevation = 100;
+        $course->max_participants = 50;
+        $course->km = 10;
+        $course->date = '2023-02-26 15:00:00';
+        $course->start_point = 'Punt de partida';
+        $course->sponsorship_price = 150;
+        $course->is_active = true;
+        $course->save();
     }
 
     /**

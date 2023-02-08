@@ -14,7 +14,6 @@
     <label for="description">Descripció de la cursa</label>
     <textarea class="form-control border-0 bg-light shadow-sm" type="text" name="description">
 {{ old('description', $course->description) }}</textarea>
-
 </div>
 <div class="form-group">
     <label for="elevation">Elevación de la cursa (en metros)</label>
@@ -22,7 +21,11 @@
         value="{{ old('elevation', $course->elevation) }}">
 </div>
 <div class="form-group">
-    <label for="map_image">Arxiu de la imatge del mapa de la cursa</label>
+    <label for="poster_image">Póster de la cursa</label>
+    <input class="form-control" id="file-input" name="poster_image" type="file" />
+</div>
+<div class="form-group">
+    <label for="map_image">Mapa de la cursa</label>
     <input class="form-control" id="file-input" name="map_image" type="file" />
 </div>
 <!--max participants-->

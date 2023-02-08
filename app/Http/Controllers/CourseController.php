@@ -34,6 +34,7 @@ class CourseController extends Controller
 
         try {
             $mapFile = $request->file('map_image');
+            $posterFile = $request->file('poster_image');
             $requestArray = $request->validated();
             $images = $request->file('images');
 
@@ -43,14 +44,31 @@ class CourseController extends Controller
                 $clientFileName = $mapFile->getClientOriginalName();
                 //check for image extension
                 if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
-                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge ha de ser jpg, png o jpeg');
+                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge del mapa ha de ser jpg, png o jpeg');
                 } else if ($mapFile->getSize() < 5000000) {
                     $filename = time() . '_' . $clientFileName;
                     $mapFile->move('uploads/courses/mapimages/', $filename);
 
                     $requestArray['map_image'] = $filename;
                 } else {
-                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge no pot pesar més de 5MB');
+                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge del mapa no pot pesar més de 5MB');
+                }
+            }
+
+            if ($posterFile !== null) {
+                $extension = $posterFile->getClientOriginalExtension();
+                //get name of file
+                $clientFileName = $posterFile->getClientOriginalName();
+                //check for image extension
+                if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
+                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge  del poster ha de ser jpg, png o jpeg');
+                } else if ($posterFile->getSize() < 5000000) {
+                    $filename = time() . '_' . $clientFileName;
+                    $posterFile->move('uploads/courses/posterimages/', $filename);
+
+                    $requestArray['poster_image'] = $filename;
+                } else {
+                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge del poster no pot pesar més de 5MB');
                 }
             }
 
@@ -62,14 +80,14 @@ class CourseController extends Controller
                     $clientFileName = $image->getClientOriginalName();
                     //check for image extension
                     if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
-                        return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge ha de ser jpg, png o jpeg');
-                    } else if ($image->getSize() < 5000000) {
+                        return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La llista d\'imatges ha de ser jpg, png o jpeg');
+                    } else if ($image->getSize() < 50000000) {
                         $filename = time() . '_' . $clientFileName;
                         $image->move('uploads/courses/images/', $filename);
 
                         array_push($imagesArray, $filename);
                     } else {
-                        return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge no pot pesar més de 5MB');
+                        return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La llista d\'imatges no pot pesar més de 50MB');
                     }
                 }
                 $requestArray['images'] = json_encode($imagesArray);
@@ -104,12 +122,11 @@ class CourseController extends Controller
 
         try {
             $mapFile = $request->file('map_image');
+            $posterFile = $request->file('poster_image');
             $requestArray = $request->validated();
             $images = $request->file('images');
 
             if ($mapFile !== null) {
-
-
                 $extension = $mapFile->getClientOriginalExtension();
                 $clientFileName = $mapFile->getClientOriginalName();
                 //check for image extension
@@ -122,10 +139,30 @@ class CourseController extends Controller
                     $requestArray['map_image'] = $filename;
 
                     //delete file that are named the same as in $course->map_image if exists
-                    if (file_exists('uploads/courses/mapimages/' . $course->map_image)) {
+                    if ($course->map_image !== null && file_exists('uploads/courses/mapimages/' . $course->map_image)) {
                         unlink('uploads/courses/mapimages/' . $course->map_image);
                     }
+                } else {
+                    return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: La imatge no pot pesar més de 5MB');
+                }
+            }
 
+            if ($posterFile !== null) {
+                $extension = $posterFile->getClientOriginalExtension();
+                $clientFileName = $posterFile->getClientOriginalName();
+                //check for image extension
+                if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
+                    return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: La imatge ha de ser jpg, png o jpeg');
+                } else if ($posterFile->getSize() < 5000000) {
+                    $filename = time() . '_' . $clientFileName;
+                    $posterFile->move('uploads/courses/posterimages/', $filename);
+
+                    $requestArray['poster_image'] = $filename;
+
+                    //delete file that are named the same as in $course->poster_image if exists
+                    if ($course->poster_image !== null && file_exists('uploads/courses/posterimages/' . $course->poster_image)) {
+                        unlink('uploads/courses/posterimages/' . $course->poster_image);
+                    }
                 } else {
                     return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: La imatge no pot pesar més de 5MB');
                 }
@@ -148,9 +185,11 @@ class CourseController extends Controller
 
                         //delete file that are named the same as in $course->images if exists
                         $imagesList = json_decode($course->images);
-                        foreach ($imagesList as $image) {
-                            if (file_exists('uploads/courses/images/' . $image)) {
-                                unlink('uploads/courses/images/' . $image);
+                        if ($imagesList !== null) {
+                            foreach ($imagesList as $image) {
+                                if (file_exists('uploads/courses/images/' . $image)) {
+                                    unlink('uploads/courses/images/' . $image);
+                                }
                             }
                         }
                     } else {
@@ -161,13 +200,12 @@ class CourseController extends Controller
             }
 
             $course->update($requestArray);
-
         } catch (\Exception $e) {
             //check if error is related to unique url
             if (strpos($e->getMessage(), 'courses_url_unique')) {
                 return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: La url ya existe');
             } else {
-                return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: ' . $e->getMessage());
+                //     return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: ' . $e->getMessage());
             }
         }
 
@@ -179,6 +217,14 @@ class CourseController extends Controller
         //delete mapimages inside uploads/courses/mapimages/, if exists
         if ($course->map_image !== null) {
             $image_path = public_path() . '/uploads/courses/mapimages/' . $course->map_image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+
+        //delete posterimages inside uploads/courses/posterimages/, if exists
+        if ($course->poster_image !== null) {
+            $image_path = public_path() . '/uploads/courses/posterimages/' . $course->poster_image;
             if (file_exists($image_path)) {
                 unlink($image_path);
             }

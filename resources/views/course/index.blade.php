@@ -17,9 +17,9 @@
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
                         href="{{ route('course.show', $course) }}">
-                        @if ($course->map_image)
+                        @if ($course->poster_image)
                             <img class="img-thumbnail pointer" width="50"
-                                src="{{ asset('/uploads/courses/mapimages/' . $course->map_image) }}" alt="sin imagen" />
+                                src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}" alt="sin imagen" />
                         @else
                             <span>s/i</span>
                         @endif
