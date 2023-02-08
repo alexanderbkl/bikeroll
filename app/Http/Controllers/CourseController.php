@@ -205,7 +205,7 @@ class CourseController extends Controller
             if (strpos($e->getMessage(), 'courses_url_unique')) {
                 return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: La url ya existe');
             } else {
-                //     return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: ' . $e->getMessage());
+                return redirect()->route('course.edit', $course)->with('status', 'Error al actualizar la cursa: ' . $e->getMessage());
             }
         }
 

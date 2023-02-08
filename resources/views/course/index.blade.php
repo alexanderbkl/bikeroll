@@ -11,7 +11,7 @@
             @endauth
         </div>
         <hr>
-        <p class="lead text-secondary">Cursajes de bicicleta.</p>
+        <p class="lead text-secondary">Cursajes de bicicleta:</p>
         <ul class="list-group">
             @forelse ($courses as $course)
                 <li class="list-group-item border-0 mb-3 shadow-sm">

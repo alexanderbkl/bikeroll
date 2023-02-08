@@ -14,7 +14,9 @@
                 <p class="lead text-secondary">Opciones de administrador:
                 </p>
                 <div class="d-flex flex-row align-items-center">
-                    <a class="btn btn-lg btn-block btn-primary" href="{{ route('course.index') }}">Curses</a>
+                    <a class="m-5 btn btn-lg btn-block btn-primary" href="{{ route('course.index') }}">Cursos</a>
+                    <a class="m-5 btn btn-lg btn-block btn-primary" href="{{ route('insurers.index') }}">Aseguradoras</a>
+                    {{-- <a class="m-5 btn btn-lg btn-block btn-primary" href="{{ route('sponsors.index') }}">Patrocinadores</a> --}}
                 </div>
 
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InsurerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
@@ -28,6 +29,7 @@ Route::resource('projects', ProjectController::class)
 ->names('projects');
 
 Route::resource('course', CourseController::class)->names('course');
+Route::resource('insurers', InsurerController::class)->names('insurers');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

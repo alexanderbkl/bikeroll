@@ -38,12 +38,12 @@
 
             <p class="text-black-50">Creado {{ $course->created_at->diffForHumans() }}</p>
             <div class="d-flex justify-content-between align-items-between">
-                <a href="{{ route('course.index') }}">Back</a>
+                <a href="{{ route('course.index') }}">Atrás</a>
                 @auth
                     <div class="btn-group btn-group-sm">
-                        <a class="btn btn-primary" href="{{ route('course.edit', $course) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('course.edit', $course) }}">Editar</a>
                         <a class="btn btn-danger" href="#"
-                            onclick="document.getElementById('delete-course').submit()">Delete</a>
+                            onclick="document.getElementById('delete-course').submit()">Eliminar</a>
                         <form class="d-none" id="delete-course" method="POST" action="{{ route('course.destroy', $course) }}">
                             @csrf @method('DELETE')
                         </form>
