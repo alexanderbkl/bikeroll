@@ -11,6 +11,11 @@
             @else
                 <p>No hay imagen</p>
             @endif
+            @if ($course->is_active)
+                <p class="text-success">Activo</p>
+            @else
+                <p class="text-danger">Inactivo</p>
+            @endif
             <p class="text-secondary">{{ $course->description }}</p>
             <p class="text-black-50">Creado {{ $course->created_at->diffForHumans() }}</p>
             <div class="d-flex justify-content-between align-items-between">

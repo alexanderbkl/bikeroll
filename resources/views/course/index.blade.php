@@ -26,6 +26,12 @@
                         <span class="font-weight-bold">
                             {{ $course->title }}
                         </span>
+                        <!--check if course is_active-->
+                        @if ($course->is_active)
+                            <span class="text-success">Activo</span>
+                        @else
+                            <span class="text-danger">Inactivo</span>
+                        @endif
                         <span class="text-black-50">
                             {{ $course->created_at->format('d/m/Y') }}
                         </span>

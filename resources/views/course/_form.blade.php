@@ -67,5 +67,13 @@
     <input class="form-control border-0 bg-light shadow-sm" id="photos_id" type="number" name="photos_id"
         value="{{ old('photos_id', $course->photos_id) }}">
 </div>
+<!--isactive (select value 0 if inactive,  1 if active)-->
+<div class="form-group">
+    <label for="is_active">Activa</label>
+    <select class="form-control border-0 bg-light shadow-sm" id="is_active" name="is_active">
+        <option value="0" {{ old('is_active', $course->is_active) == 0 ? 'selected' : '' }}>No</option>
+        <option value="1" {{ old('is_active', $course->is_active) == 1 ? 'selected' : '' }}>Sí</option>
+    </select>
+</div>
 <button class="btn btn-primary btn-lg btn-block">{{ $btnText }}</button>
 <a class="btn btn-link btn-block" href="{{ route('course.index') }}">Cancelar</a>

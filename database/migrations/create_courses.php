@@ -32,6 +32,7 @@ la. A més de totes les fotografies que es fan.*/
             $table->string('poster_url');
             $table->integer('sponsorship_price');
             $table->string('photos_id');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
 
