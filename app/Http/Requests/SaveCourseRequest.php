@@ -43,6 +43,7 @@ class SaveCourseRequest extends FormRequest
             'km' => 'required|integer',
             'date' => 'required|date',
             'start_point' => 'required',
+            'images' => 'array',
             'sponsorship_price' => 'required|integer',
             'is_active' => 'required|boolean',
         ];

@@ -21,7 +21,7 @@
                             <img class="img-thumbnail" width="50"
                                 src="{{ asset('/uploads/courses/mapimages/' . $course->map_image) }}" alt="sin imagen" />
                         @else
-                            <p>s/i</p>
+                            <span>s/i</span>
                         @endif
                         <span class="font-weight-bold">
                             {{ $course->title }}
