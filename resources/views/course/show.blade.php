@@ -7,7 +7,7 @@
         <div class="bg-white p-5 shadow rounded">
             <h1>{{ $course->title }}</h1>
             @if ($course->map_image)
-                <img class="img-thumbnail" width="100" src="{{ asset('/uploads/courses/'.$course->map_image) }}" alt="sin imagen"/>
+                <img class="img-thumbnail" width="100" src="{{ asset('/uploads/courses/mapimages'.$course->map_image) }}" alt="sin imagen"/>
             @else
                 <p>No hay imagen</p>
             @endif

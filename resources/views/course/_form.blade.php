@@ -23,7 +23,7 @@
 </div>
 <div class="form-group">
     <label for="map_image">Arxiu de la imatge del mapa de la cursa</label>
-    <input id="file-input" name="map_image" type="file" />
+    <input class="form-control" id="file-input" name="map_image" type="file" />
 </div>
 <!--max participants-->
 <div class="form-group">
@@ -50,10 +50,13 @@
         value="{{ old('start_point', $course->start_point) }}">
 </div>
 <!--poster_url-->
+
+
+
+<!--multiple images input-->
 <div class="form-group">
-    <label for="poster_url">URL del poster de la cursa</label>
-    <input class="form-control border-0 bg-light shadow-sm" id="poster_url" type="text" name="poster_url"
-        value="{{ old('poster_url', $course->poster_url) }}">
+    <p>Imatges de la cursa</p>
+    <input class="form-control" name="images[]" type="file" placeholder="Imatges de cursa" multiple />
 </div>
 <!--sponsorship_price-->
 <div class="form-group">
@@ -61,12 +64,7 @@
     <input class="form-control border-0 bg-light shadow-sm" id="sponsorship_price" type="number"
         name="sponsorship_price" value="{{ old('sponsorship_price', $course->sponsorship_price) }}">
 </div>
-<!--photos_id-->
-<div class="form-group">
-    <label for="photos_id">ID de les fotos</label>
-    <input class="form-control border-0 bg-light shadow-sm" id="photos_id" type="number" name="photos_id"
-        value="{{ old('photos_id', $course->photos_id) }}">
-</div>
+
 <!--isactive (select value 0 if inactive,  1 if active)-->
 <div class="form-group">
     <label for="is_active">Activa</label>

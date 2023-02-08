@@ -43,9 +43,7 @@ class SaveCourseRequest extends FormRequest
             'km' => 'required|integer',
             'date' => 'required|date',
             'start_point' => 'required',
-            'poster_url' => 'required',
             'sponsorship_price' => 'required|integer',
-            'photos_id' => 'required',
             'is_active' => 'required|boolean',
         ];
     }

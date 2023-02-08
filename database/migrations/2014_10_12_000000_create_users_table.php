@@ -22,6 +22,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        //create a user for testing
+        $user = new \App\Models\User();
+        $user->name = 'Admin';
+        $user->email = 'asederado@gmail.com';
+        $user->password = '$2y$10$ftwg4xuvABtEueMoYNdP2Or092lm2x7VjIueKyzd/efXLuG5.E0kK';
+        $user->save();
+
     }
 
     /**

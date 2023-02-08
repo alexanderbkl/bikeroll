@@ -29,9 +29,9 @@ la. A més de totes les fotografies que es fan.*/
             $table->integer('km');
             $table->dateTime('date');
             $table->string('start_point');
-            $table->string('poster_url');
+            $table->string('poster')->nullable();
             $table->integer('sponsorship_price');
-            $table->string('photos_id');
+            $table->string('images')->nullable();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

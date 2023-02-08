@@ -19,7 +19,7 @@
                         href="{{ route('course.show', $course) }}">
                         @if ($course->map_image)
                             <img class="img-thumbnail" width="50"
-                                src="{{ asset('/uploads/courses/' . $course->map_image) }}" alt="sin imagen" />
+                                src="{{ asset('/uploads/courses/mapimages/' . $course->map_image) }}" alt="sin imagen" />
                         @else
                             <p>s/i</p>
                         @endif
