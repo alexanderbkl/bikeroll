@@ -27,9 +27,6 @@
             <li class="nav-item">
                 <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ setActive('insurers.*') }}" href="{{ route('insurers.index') }}">Aseguradoras</a>
-            </li>
             @endrole
             @role('pro')
             <li class="nav-item">
