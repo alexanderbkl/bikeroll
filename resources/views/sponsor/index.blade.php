@@ -1,47 +1,48 @@
 @extends('layout')
 
-@section('title', 'Cursajes')
+@section('title', 'Patrocinadores')
 
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="display-4 mb-0">Cursajes</h1>
+            <h1 class="display-4 mb-0">Patrocinadores</h1>
             @role('admin')
-                <a class="btn btn-primary" href="{{ route('course.create') }}">Crear nuevo cursaje</a>
+                <a class="btn btn-primary" href="{{ route('sponsor.create') }}">Crear nuevo patrocinador</a>
             @endrole
         </div>
         <hr>
-        <p class="lead text-secondary">Cursajes de bicicleta:</p>
+        <p class="lead text-secondary">Lista de patrocinadores:</p>
         <ul class="list-group">
-            @forelse ($courses as $course)
+            @forelse ($sponsors as $sponsor)
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
-                        href="{{ route('course.show', $course) }}">
-                        @if ($course->poster_image)
+                        href="{{ route('sponsor.show', $sponsor) }}">
+                        @if ($sponsor->poster_image)
                             <img class="img-thumbnail pointer" width="50"
-                                src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}" alt="sin imagen" />
+                                src="{{ asset('/uploads/sponsors/posterimages/' . $sponsor->poster_image) }}"
+                                alt="sin imagen" />
                         @else
                             <span>s/i</span>
                         @endif
                         <span class="font-weight-bold">
-                            {{ $course->title }}
+                            {{ $sponsor->title }}
                         </span>
                         <!--check if course is_active-->
-                        @if ($course->is_active)
+                        @if ($sponsor->is_active)
                             <span class="text-success">Activo</span>
                         @else
                             <span class="text-danger">Inactivo</span>
                         @endif
                         <span class="text-black-50">
-                            {{ $course->created_at->format('d/m/Y') }}
+                            {{ $sponsor->created_at->format('d/m/Y') }}
                         </span>
                     </a>
                 </li>
             @empty
                 <li class="list-group-item border-0 mb-3 shadow-sm">
-                    No hay cursas disponibles</li>
+                    No hay patrocinadores por el momento</li>
             @endforelse
-            {{ $courses->links() }}
+            {{ $sponsors->links() }}
         </ul>
     </div>
 @endsection

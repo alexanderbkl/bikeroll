@@ -9,7 +9,7 @@
             <div class="col-12 col-lg-6">
                 <h1 class="display-4 text-primary">Panel administrador</h1>
                 @auth
-                    Welcome, {{ auth()->user()->name }}
+                    Bienvenido, {{ auth()->user()->name }}
                 @endauth
                 <p class="lead text-secondary">Opciones de administrador:
                 </p>

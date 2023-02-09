@@ -15,6 +15,9 @@
                 <a class="nav-link {{ setActive('course.*') }}" href="{{ route('course.index') }}">Curses</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ setActive('sponsor.*') }}" href="{{ route('sponsor.index') }}">Patrocinadors</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ setActive('about') }}" href="{{ route('about') }}">About</a>
             </li>
             <li class="nav-item">

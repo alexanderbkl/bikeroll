@@ -17,8 +17,10 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
+        $sponsors = $course->sponsors();
         return view('course.show', [
-            'course' => $course
+            'course' => $course,
+            'sponsors' => $sponsors
         ]);
     }
 

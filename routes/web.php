@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InsurerController;
+use App\Http\Controllers\SponsorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
@@ -30,6 +31,7 @@ Route::resource('projects', ProjectController::class)
 
 Route::resource('course', CourseController::class)->names('course');
 Route::resource('insurers', InsurerController::class)->names('insurers');
+Route::resource('sponsor', SponsorController::class)->names('sponsor');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

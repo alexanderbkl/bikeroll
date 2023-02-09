@@ -12,7 +12,7 @@
             <p class="text-black-50">Creado {{ $insurer->created_at->diffForHumans() }}</p>
             <div class="d-flex justify-content-between align-items-between">
                 <a href="{{ route('insurers.index') }}">Atrás</a>
-                @auth
+                @role('admin')
                     <div class="btn-group btn-group-sm">
                         <a class="btn btn-primary" href="{{ route('insurers.edit', $insurer) }}">Editar</a>
                         <a class="btn btn-danger" href="#"
@@ -21,7 +21,7 @@
                             @csrf @method('DELETE')
                         </form>
                     </div>
-                @endauth
+                @endrole
             </div>
         </div>
     </div>
