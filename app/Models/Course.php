@@ -9,7 +9,6 @@ class Course extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
     public function sponsors()
     {
         return $this->belongsToMany(Sponsor::class, 'sponsors_courses');

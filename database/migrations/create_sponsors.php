@@ -15,19 +15,24 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            // Afegir, editar i desactivar sponsors. Dels sponsors volem saber el seu, nom, el
-            // seu CIF, logo, adreça i les curses que patrocinen i si volen sortir a la plana
-            // principal. Evidentment això últim també tindrà un cost. Es generarà una factura
-            // amb PDF amb es dades de l’empresa i l’import total calculat segons el número
-            // de curses que patrocinin.
             $table->string('name');
             $table->string('cif')->unique();
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->string('address');
             $table->boolean('is_active')->default(false);
-            $table->integer('price');
+            $table->integer('total_price')->nullable();
             $table->timestamps();
         });
+
+
+        //create test sponsor
+        $sponsor = new \App\Models\Sponsor();
+        $sponsor->name = 'Patrocinador de prova';
+        $sponsor->cif = '12345678A';
+        $sponsor->address = 'Adreça de patrocinador de prova';
+        $sponsor->is_active = true;
+        $sponsor->save();
+        
     }
 
     /**
