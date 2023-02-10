@@ -25,10 +25,20 @@
                 <p class="text-danger">Inactivo</p>
             @endif
             <p class="text-secondary">{{ $course->description }}</p>
-            <!--Create a for loop to display all images saved inside the json list called $course->images, transform first to array/object-->
-            @if (json_decode($course->images) == null)
-                <p>No hay imágenes</p>
+
+            @if ($sponsors->count() > 0)
+                <p>Patrocinadores:</p>
+                @foreach ($sponsors as $sponsor)
+                    @if ($sponsor->is_active)
+                        <a href="{{ route('sponsor.show', $sponsor) }}" target="_blank">{{ $sponsor->name }}</a>
+                    @endif
+                @endforeach
             @else
+                <p>No hay patrocinadores</p>
+            @endif
+
+            <!--Create a for loop to display all images saved inside the json list called $course->images, transform first to array/object-->
+            @if (json_decode($course->images) != null)
                 <p>Imágenes:</p>
                 @foreach (json_decode($course->images) as $image)
                     <img role="button" onclick="window.open(this.src);" class="img-thumbnail" width="200"
@@ -36,7 +46,7 @@
                 @endforeach
             @endif
 
-            <p class="text-black-50">Creado {{ $course->created_at->diffForHumans() }}</p>
+            <p class="text-black-50">Se celebra el: {{ date('d/m/Y', strtotime($course->date)) }}</p>
             <div class="d-flex justify-content-between align-items-between">
                 <a href="{{ route('course.index') }}">Atrás</a>
                 @role('admin')

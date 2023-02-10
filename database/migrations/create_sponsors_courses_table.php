@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('restrict');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('restrict');
         });
+
+
     }
 
     /**

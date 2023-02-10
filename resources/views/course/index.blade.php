@@ -33,7 +33,7 @@
                             <span class="text-danger">Inactivo</span>
                         @endif
                         <span class="text-black-50">
-                            {{ $course->created_at->format('d/m/Y') }}
+                            {{ date('d/m/Y', strtotime($course->date)) }}
                         </span>
                     </a>
                 </li>

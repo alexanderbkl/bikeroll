@@ -17,7 +17,7 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $sponsors = $course->sponsors();
+        $sponsors = $course->sponsors()->get();
         return view('course.show', [
             'course' => $course,
             'sponsors' => $sponsors

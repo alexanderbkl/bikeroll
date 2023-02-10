@@ -32,7 +32,11 @@ return new class extends Migration
         $sponsor->address = 'Adreça de patrocinador de prova';
         $sponsor->is_active = true;
         $sponsor->save();
-        
+
+        $courses = \App\Models\Course::all();
+
+        $sponsor->courses()->attach($courses);
+
     }
 
     /**

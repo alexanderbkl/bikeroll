@@ -20,7 +20,9 @@ class SponsorController extends Controller
     public function show(Sponsor $sponsor)
     {
         //$courses = $sponsor->courses()->get();
-        $courses = $sponsor->courses();
+        $courses = $sponsor->courses()->get();
+
+        $courses = $courses->sortByDesc('is_active');
         return view('sponsor.show', [
             'sponsor' => $sponsor,
             'courses' => $courses
@@ -50,5 +52,28 @@ class SponsorController extends Controller
 
 
         return redirect()->route('sponsor.index')->with('status', 'Patrocinador creado con éxito');
+    }
+
+    public function edit(Sponsor $sponsor)
+    {
+        $courses = Course::all();
+        return view('sponsor.edit', [
+            'sponsor' => $sponsor,
+            'courses' => $courses
+        ]);
+    }
+
+    public function update(Sponsor $sponsor, SaveSponsorRequest $request)
+    {
+
+        $courses = $request->courses;
+        $requestArray = $request->validated();
+        $sponsor->update($requestArray);
+        //check if courses are empty
+        if (!empty($courses)) {
+            $sponsor->courses()->sync($courses);
+        }
+
+        return redirect()->route('sponsor.index')->with('status', 'Patrocinador actualizado con éxito');
     }
 }

@@ -24,10 +24,10 @@
     <input class="form-control border-0 bg-light shadow-sm" type="text" name="address" value="{{ old('address', $sponsor->address) }}">
 </div>
 <div class="form-group">
-    <label for="is_active">Activa</label>
+    <label for="is_active">Activo</label>
     <select class="form-control border-0 bg-light shadow-sm" id="is_active" name="is_active">
-        <option value="0" {{ old('is_active', $course->is_active) == 0 ? 'selected' : '' }}>No</option>
-        <option value="1" {{ old('is_active', $course->is_active) == 1 ? 'selected' : '' }}>Sí</option>
+        <option value="0" {{ old('is_active', $sponsor->is_active) == 0 ? 'selected' : '' }}>No</option>
+        <option value="1" {{ old('is_active', $sponsor->is_active) == 1 ? 'selected' : '' }}>Sí</option>
     </select>
 </div>
 
