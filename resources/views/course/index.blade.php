@@ -1,17 +1,17 @@
 @extends('layout')
 
-@section('title', 'Cursajes')
+@section('title', 'Carreras')
 
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="display-4 mb-0">Cursajes</h1>
+            <h1 class="display-4 mb-0">Carreras</h1>
             @role('admin')
-                <a class="btn btn-primary" href="{{ route('course.create') }}">Crear nuevo cursaje</a>
+                <a class="btn btn-primary" href="{{ route('course.create') }}">Crear nueva carrera</a>
             @endrole
         </div>
         <hr>
-        <p class="lead text-secondary">Cursajes de bicicleta:</p>
+        <p class="lead text-secondary">Carreras de bicicleta:</p>
         <ul class="list-group">
             @forelse ($courses as $course)
                 <li class="list-group-item border-0 mb-3 shadow-sm">

@@ -9,8 +9,8 @@
                 <h1>{{ $sponsor->name }}</h1>
                 <h3>CIF: {{ $sponsor->cif }}</h3>
                 @if ($sponsor->logo)
-                    <img role="button" onclick="window.open(this.src);" class="img-thumbnail"
-                        src="{{ asset('/uploads/sponsors/sponsorlogos/' . $sponsor->logo) }}" alt="sin imagen" />
+                    <img role="button" onclick="window.open(this.src);" class="img-thumbnail" width="200"
+                        src="{{ asset('/uploads/sponsors/logos/' . $sponsor->logo) }}" alt="sin imagen" />
                 @endif
             </div>
             @if ($sponsor->is_active)

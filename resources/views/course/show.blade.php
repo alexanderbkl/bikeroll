@@ -30,7 +30,7 @@
                 <p>Patrocinadores:</p>
                 @foreach ($sponsors as $sponsor)
                     @if ($sponsor->is_active)
-                        <a href="{{ route('sponsor.show', $sponsor) }}" target="_blank">{{ $sponsor->name }}</a>
+                        <a href="{{ route('sponsor.show', $sponsor) }}" target="_blank">{{ $sponsor->name }}</a> <br>
                     @endif
                 @endforeach
             @else

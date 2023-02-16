@@ -12,10 +12,16 @@
         value="{{ old('cif', $sponsor->cif) }}">
 </div>
 <div class="form-group">
-    <label for="sponsors">Cursas que patrocina</label>
-    <select class="form-control" id="sponsors" name="courses[]" multiple>
+    <label for="courses">Carreras que patrocina</label>
+    <select class="form-control" id="sourses" name="courses[]" multiple>
         @foreach($courses as $course)
-            <option value="{{ $course->id }}">{{ $course->title }}</option>
+            <option value="{{ $course->id }}">{{ $course->title }}
+                @if ($course->is_active == 1)
+                    (Activa)
+                @else
+                    (Inactiva)
+                @endif
+            </option>
         @endforeach
     </select>
 </div>
@@ -32,8 +38,8 @@
 </div>
 
 <div class="form-group">
-    <label for="logo">Póster de la cursa</label>
+    <label for="logo">Logo</label>
     <input class="form-control" id="file-input" name="logo" type="file" />
 </div>
 <button class="btn btn-primary btn-lg btn-block">{{ $btnText }}</button>
-<a class="btn btn-link btn-block" href="{{ route('course.index') }}">Cancelar</a>
+<a class="btn btn-link btn-block" href="{{ route('sponsor.index') }}">Cancelar</a>

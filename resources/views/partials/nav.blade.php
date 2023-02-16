@@ -12,10 +12,10 @@
                 <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ setActive('course.*') }}" href="{{ route('course.index') }}">Curses</a>
+                <a class="nav-link {{ setActive('course.*') }}" href="{{ route('course.index') }}">Carreras</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ setActive('sponsor.*') }}" href="{{ route('sponsor.index') }}">Patrocinadors</a>
+                <a class="nav-link {{ setActive('sponsor.*') }}" href="{{ route('sponsor.index') }}">Patrocinadores</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ setActive('about') }}" href="{{ route('about') }}">About</a>
@@ -24,7 +24,7 @@
                 <a class="nav-link {{ setActive('projects.*') }}" href="{{ route('projects.index') }}">Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ setActive('contact') }}" href="{{ route('contact') }}">Contact</a>
+                <a class="nav-link {{ setActive('contact') }}" href="{{ route('contact') }}">Contactar</a>
             </li>
             @role('admin')
             <li class="nav-item">

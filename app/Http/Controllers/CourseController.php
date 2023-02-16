@@ -4,20 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
     public function index()
     {
+        $courses = Course::orderBy('is_active', 'desc')->paginate(5);
+        
         return view('course.index', [
-            'courses' => Course::latest()->paginate(5)
+            'courses' => $courses
         ]);
     }
 
     public function show(Course $course)
     {
         $sponsors = $course->sponsors()->get();
+
+        $sponsors = $sponsors->sortByDesc('is_active');
+
         return view('course.show', [
             'course' => $course,
             'sponsors' => $sponsors
@@ -26,8 +32,10 @@ class CourseController extends Controller
 
     public function create()
     {
+        $sponsors = Sponsor::all();
         return view('course.create', [
-            'course' => new Course
+            'course' => new Course,
+            'sponsors' => $sponsors
         ]);
     }
 
@@ -37,6 +45,7 @@ class CourseController extends Controller
         try {
             $mapFile = $request->file('map_image');
             $posterFile = $request->file('poster_image');
+            $sponsors = $request->sponsors;
             $requestArray = $request->validated();
             $images = $request->file('images');
 
@@ -46,7 +55,7 @@ class CourseController extends Controller
                 $clientFileName = $mapFile->getClientOriginalName();
                 //check for image extension
                 if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
-                    return redirect()->route('course.create')->with('status', 'Error al actualizar la cursa: La imatge del mapa ha de ser jpg, png o jpeg');
+                    return redirect()->route('course.create')->with('status', 'Error al crear la cursa: La imatge del mapa ha de ser jpg, png o jpeg');
                 } else if ($mapFile->getSize() < 5000000) {
                     $filename = time() . '_' . $clientFileName;
                     $mapFile->move('uploads/courses/mapimages/', $filename);
@@ -95,7 +104,11 @@ class CourseController extends Controller
                 $requestArray['images'] = json_encode($imagesArray);
             }
 
-            Course::create($requestArray);
+            $course = Course::create($requestArray);
+
+            if (!empty($sponsors)) {
+                $course->sponsors()->attach($sponsors);
+            }
         } catch (\Exception $e) {
             //check if error is related to unique url
             if (strpos($e->getMessage(), 'courses_url_unique')) {
@@ -114,8 +127,10 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
+        $sponsors = Sponsor::all();
         return view('course.edit', [
-            'course' => $course
+            'course' => $course,
+            'sponsors' => $sponsors
         ]);
     }
 
@@ -125,6 +140,7 @@ class CourseController extends Controller
         try {
             $mapFile = $request->file('map_image');
             $posterFile = $request->file('poster_image');
+            $sponsors = $request->sponsors;
             $requestArray = $request->validated();
             $images = $request->file('images');
 
@@ -202,6 +218,11 @@ class CourseController extends Controller
             }
 
             $course->update($requestArray);
+
+            //check if sponsors are empty
+            if (!empty($sponsors)) {
+                $course->sponsors()->sync($sponsors);
+            }
         } catch (\Exception $e) {
             //check if error is related to unique url
             if (strpos($e->getMessage(), 'courses_url_unique')) {
@@ -211,7 +232,7 @@ class CourseController extends Controller
             }
         }
 
-        return redirect()->route('course.show', $course)->with('status', 'El cursaje fue actualizado con éxito');
+        return redirect()->route('course.show', $course)->with('status', 'La carrera fue actualizada con éxito');
     }
 
     public function destroy(Course $course)

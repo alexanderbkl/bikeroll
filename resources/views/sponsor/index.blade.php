@@ -17,9 +17,9 @@
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
                         href="{{ route('sponsor.show', $sponsor) }}">
-                        @if ($sponsor->poster_image)
+                        @if ($sponsor->logo)
                             <img class="img-thumbnail pointer" width="50"
-                                src="{{ asset('/uploads/sponsors/posterimages/' . $sponsor->poster_image) }}"
+                                src="{{ asset('/uploads/sponsors/logos/' . $sponsor->logo) }}"
                                 alt="sin imagen" />
                         @else
                             <span>s/i</span>

@@ -12,8 +12,11 @@ class SponsorController extends Controller
 
     public function index()
     {
+        //get Sponsor and paginate 5, sortByDesc is_active
+        $sponsors = Sponsor::orderBy('is_active', 'desc')->paginate(5);
+        
         return view('sponsor.index', [
-            'sponsors' => Sponsor::latest()->paginate(5)
+            'sponsors' => $sponsors
         ]);
     }
 
@@ -23,6 +26,7 @@ class SponsorController extends Controller
         $courses = $sponsor->courses()->get();
 
         $courses = $courses->sortByDesc('is_active');
+
         return view('sponsor.show', [
             'sponsor' => $sponsor,
             'courses' => $courses
@@ -42,13 +46,39 @@ class SponsorController extends Controller
 
     public function store(SaveSponsorRequest $request)
     {
-        $courses = $request->courses;
-        $requestArray = $request->validated();
-        //$requestArray['courses'] = "";
-        $sponsor = Sponsor::create($requestArray);
+        try {
+            $logoFile = $request->file('logo');
+            $courses = $request->courses;
+            $requestArray = $request->validated();
 
-        //echo $name;
-        $sponsor->courses()->attach($courses);
+            if ($logoFile !== null) {
+                $extension = $logoFile->extension();
+                $clientFileName = $logoFile->getClientOriginalName();
+                //check for image extension
+                if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
+                    return redirect()->route('sponsor.create')->with('status', 'Error al crear el sponsor: El logo tiene que ser jpg, png o jpeg');
+                } else if ($logoFile->getSize() < 5000000) {
+                    $filename = time() . '_' . $clientFileName;
+                    $logoFile->move('uploads/sponsors/logos/', $filename);
+
+                    $requestArray['logo'] = $filename;
+                } else {
+                    return redirect()->route('sponsor.create')->with('status', 'Error al crear el sponsor: El logo no puede pesar más de 5MB');
+                }
+            }
+            $sponsor = Sponsor::create($requestArray);
+
+            if (!empty($courses)) {
+                $sponsor->courses()->attach($courses);
+            }
+        } catch (\Exception $e) {
+            //check if error is related to unique cif
+            if (strpos($e->getMessage(), 'sponsors_cif_unique')) {
+                return redirect()->route('sponsor.create')->with('status', 'El CIF ya existe');
+            } else {
+                return redirect()->route('sponsor.create')->with('status', 'Error al crear el patrocinador: ' . $e->getMessage());
+            }
+        }
 
 
         return redirect()->route('sponsor.index')->with('status', 'Patrocinador creado con éxito');
@@ -66,13 +96,47 @@ class SponsorController extends Controller
     public function update(Sponsor $sponsor, SaveSponsorRequest $request)
     {
 
-        $courses = $request->courses;
-        $requestArray = $request->validated();
-        $sponsor->update($requestArray);
-        //check if courses are empty
-        if (!empty($courses)) {
-            $sponsor->courses()->sync($courses);
+        try {
+            $logoFile = $request->file('logo');
+            $courses = $request->courses;
+            $requestArray = $request->validated();
+
+            if ($logoFile !== null) {
+                $extension = $logoFile->extension();
+                $clientFileName = $logoFile->getClientOriginalName();
+                //check for image extension
+                if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
+                    return redirect()->route('sponsor.edit', $sponsor)->with('status', 'Error al actualizar el sponsor: El logo tiene que ser jpg, png o jpeg');
+                } else if ($logoFile->getSize() < 5000000) {
+                    $filename = time() . '_' . $clientFileName;
+                    $logoFile->move('uploads/sponsors/logos/', $filename);
+
+                    $requestArray['logo'] = $filename;
+
+                    //delete file that are named the same as in $sponsor->logo if exists
+                    if ($sponsor->logo !== null && file_exists('uploads/sponsors/logos/' . $sponsor->logo)) {
+                        unlink('uploads/sponsors/logos/' . $sponsor->logo);
+                    }
+                } else {
+                    return redirect()->route('sponsor.edit', $sponsor)->with('status', 'Error al actualizar el sponsor: El logo no puede pesar más de 5MB');
+                }
+            }
+
+            $sponsor->update($requestArray);
+            //check if courses are empty
+            if (!empty($courses)) {
+                $sponsor->courses()->sync($courses);
+            }
+        } catch (\Exception $e) {
+            //check if error is related to unique cif
+            if (strpos($e->getMessage(), 'sponsors_cif_unique')) {
+                return redirect()->route('sponsor.edit', $sponsor)->with('status', 'El CIF ya existe');
+            } else {
+                return redirect()->route('sponsor.edit', $sponsor)->with('status', 'Error al actualizar el patrocinador: ' . $e->getMessage());
+            }
         }
+
+
 
         return redirect()->route('sponsor.index')->with('status', 'Patrocinador actualizado con éxito');
     }

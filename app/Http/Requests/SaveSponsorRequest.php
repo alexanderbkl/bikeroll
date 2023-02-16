@@ -33,7 +33,6 @@ class SaveSponsorRequest extends FormRequest
         return [
             'name' => 'required|string',
             'cif' => 'required|string',
-            'logo' => 'nullable|string',
             'address' => 'required|string',
             'is_active' => 'required|boolean',
             'total_price' => 'nullable|integer',

@@ -11,7 +11,7 @@
                 @include('partials.validation-errors')
 
                 <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('course.store') }}" enctype="multipart/form-data">
-                    <h1 class="display-4">Nova cursa</h1>
+                    <h1 class="display-4">Nueva carrera</h1>
                     <hr>
                     @include('course._form', ['btnText' => 'Crear'])
                 </form>

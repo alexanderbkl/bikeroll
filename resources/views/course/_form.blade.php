@@ -52,9 +52,21 @@
     <input class="form-control border-0 bg-light shadow-sm" id="start_point" type="text" name="start_point"
         value="{{ old('start_point', $course->start_point) }}">
 </div>
-<!--poster_url-->
-
-
+<!--Sponsors-->
+<div class="form-group">
+    <label for="sponsors">Patrocinadores</label>
+    <select class="form-control" id="sponsors" name="sponsors[]" multiple>
+        @foreach ($sponsors as $sponsor)
+            <option value="{{ $sponsor->id }}">{{ $sponsor->name }}
+                @if ($sponsor->is_active == 1)
+                    (Activo)
+                @else
+                    (Inactivo)
+                @endif
+            </option>
+        @endforeach
+    </select>
+</div>
 
 <!--multiple images input-->
 <div class="form-group">
