@@ -12,7 +12,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::orderBy('is_active', 'desc')->paginate(5);
-        
+
         return view('course.index', [
             'courses' => $courses
         ]);
