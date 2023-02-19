@@ -24,11 +24,28 @@ return new class extends Migration
         });
 
         //create a user for testing
+        $admin = new \App\Models\User();
+        $admin->name = 'Admin';
+        $admin->email = 'admin@mail.com';
+        $admin->password = '$2y$10$E/CitXCI1W1Rrh7K8YGSzOQ1G4edUv2kr1g/r//xtuciuy5q7FJ26';
+        $admin->save();
+        $admin->assignRole('admin');
+
         $user = new \App\Models\User();
-        $user->name = 'Admin';
-        $user->email = 'asederado@gmail.com';
-        $user->password = '$2y$10$ftwg4xuvABtEueMoYNdP2Or092lm2x7VjIueKyzd/efXLuG5.E0kK';
+        $user->name = 'User';
+        $user->email = 'user@mail.com';
+        $user->password = '$2y$10$mAt7.zKMATgn1i/dhMhWo.vYdi8lI2b4GxoSRa8/3JJIlUm7OdMOq';
         $user->save();
+
+        $user = new \App\Models\User();
+        $user->name = 'Pro user';
+        $user->email = 'pro@mail.com';
+        $user->password = '$2y$10$mAt7.zKMATgn1i/dhMhWo.vYdi8lI2b4GxoSRa8/3JJIlUm7OdMOq';
+        $user->save();
+        $user->assignRole('pro');
+
+
+
 
     }
 
