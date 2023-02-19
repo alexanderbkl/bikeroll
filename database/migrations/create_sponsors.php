@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('address');
             $table->boolean('is_active')->default(false);
+            $table->boolean('main_plane')->default(false);
             $table->integer('total_price')->nullable();
             $table->timestamps();
         });
@@ -31,6 +32,7 @@ return new class extends Migration
         $sponsor->cif = '12345678A';
         $sponsor->address = 'Adreça de patrocinador de prova';
         $sponsor->is_active = true;
+        $sponsor->main_plane = true;
         $sponsor->save();
 
         $courses = \App\Models\Course::all();

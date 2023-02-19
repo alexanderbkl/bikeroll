@@ -18,6 +18,11 @@
             @else
                 <p class="text-danger">Inactivo</p>
             @endif
+            @if ($sponsor->main_plane)
+                <p class="text-success">Sale en plano principal</p>
+            @else
+                <p class="text-danger">No sale en plano principal</p>
+            @endif
             <p class="text-secondary">{{ $sponsor->address }}</p>
 
             @if ($courses->count() > 0)
@@ -38,6 +43,8 @@
             <div class="d-flex justify-content-between align-items-between">
                 <a href="{{ route('sponsor.index') }}">Atrás</a>
                 @role('admin')
+                    <a class="btn btn-primary" href="{{ route('sponsor.generate', $sponsor) }}">FACTURA</a>
+
                     <div class="btn-group btn-group-sm">
                         <a class="btn btn-primary" href="{{ route('sponsor.edit', $sponsor) }}">Editar</a>
                         <a class="btn btn-danger" href="#"

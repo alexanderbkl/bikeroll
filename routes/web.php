@@ -31,7 +31,10 @@ Route::resource('projects', ProjectController::class)
 
 Route::resource('course', CourseController::class)->names('course');
 Route::resource('insurers', InsurerController::class)->names('insurers');
+
 Route::resource('sponsor', SponsorController::class)->names('sponsor');
+/*Create a sponsor.generate route to generate a PDF bill*/
+Route::get('sponsor/{sponsor}/generate', [SponsorController::class, 'generate'])->name('sponsor.generate');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

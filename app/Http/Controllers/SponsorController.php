@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveSponsorRequest;
 use App\Models\Course;
 use App\Models\Sponsor;
+use Illuminate\Support\Facades\Auth;
+use PDF;
 use Illuminate\Http\Request;
 
 class SponsorController extends Controller
@@ -14,7 +16,7 @@ class SponsorController extends Controller
     {
         //get Sponsor and paginate 5, sortByDesc is_active
         $sponsors = Sponsor::orderBy('is_active', 'desc')->paginate(5);
-        
+
         return view('sponsor.index', [
             'sponsors' => $sponsors
         ]);
@@ -139,5 +141,31 @@ class SponsorController extends Controller
 
 
         return redirect()->route('sponsor.index')->with('status', 'Patrocinador actualizado con éxito');
+    }
+
+    //create a generate method to generate a pdf with the sponsor info and all courses sponsorship price associated with the sponsor
+    public function generate(Sponsor $sponsor)
+    {
+        //check if role is admin
+        $role = Auth::user()->roles;
+
+        //check if at least one role is admin
+        if (!$role->contains('name', 'admin')) {
+            return redirect()->route('sponsor.index')->with('status', 'No tienes permiso para acceder a esta página');
+        }
+
+        $courses = $sponsor->courses()->get();
+
+        $courses = $courses->sortByDesc('is_active');
+
+
+
+
+        $pdf = PDF::loadView('sponsor.pdf', [
+            'sponsor' => $sponsor,
+            'courses' => $courses
+        ]);
+
+        return $pdf->download($sponsor->cif.'-'.now().'.pdf');
     }
 }

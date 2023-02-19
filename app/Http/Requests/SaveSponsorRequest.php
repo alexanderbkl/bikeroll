@@ -35,6 +35,7 @@ class SaveSponsorRequest extends FormRequest
             'cif' => 'required|string',
             'address' => 'required|string',
             'is_active' => 'required|boolean',
+            'main_plane' => 'required|boolean',
             'total_price' => 'nullable|integer',
         ];
     }

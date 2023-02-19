@@ -36,6 +36,13 @@
         <option value="1" {{ old('is_active', $sponsor->is_active) == 1 ? 'selected' : '' }}>Sí</option>
     </select>
 </div>
+<div class="form-group">
+    <label for="main_plane">Plano principal</label>
+    <select class="form-control border-0 bg-light shadow-sm" id="main_plane" name="main_plane">
+        <option value="0" {{ old('main_plane', $sponsor->main_plane) == 0 ? 'selected' : '' }}>No</option>
+        <option value="1" {{ old('main_plane', $sponsor->main_plane) == 1 ? 'selected' : '' }}>Sí</option>
+    </select>
+</div>
 
 <div class="form-group">
     <label for="logo">Logo</label>
