@@ -26,18 +26,6 @@ return new class extends Migration
         });
 
 
-        //create test sponsor
-        $sponsor = new \App\Models\Sponsor();
-        $sponsor->name = 'Patrocinador de prova';
-        $sponsor->cif = '12345678A';
-        $sponsor->address = 'Adreça de patrocinador de prova';
-        $sponsor->is_active = true;
-        $sponsor->main_plane = true;
-        $sponsor->save();
-
-        $courses = \App\Models\Course::all();
-
-        $sponsor->courses()->attach($courses);
 
     }
 

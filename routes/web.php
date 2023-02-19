@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ use App\Http\Controllers\ProjectController;
 */
 
 
+//if there is user, redirect to validateUser, if not, redirect to login
+Route::get('/', [UserController::class, 'validateUser'])->name('validateUser');
 
 Route::view('/', 'home')->name('home');
 Route::view('/about', 'about')->name('about');
@@ -35,6 +38,15 @@ Route::resource('insurers', InsurerController::class)->names('insurers');
 Route::resource('sponsor', SponsorController::class)->names('sponsor');
 /*Create a sponsor.generate route to generate a PDF bill*/
 Route::get('sponsor/{sponsor}/generate', [SponsorController::class, 'generate'])->name('sponsor.generate');
+
+//create a user route that calls index method of the UserController
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+//rouote at /validateUser that calls the validateUser method of the UserController
+Route::get('/validateUser', [UserController::class, 'validateUser'])->name('validateUser');
+//create user.validate view route with the user as parameter
+Route::get('/validateUser/{user}', [UserController::class, 'show'])->name('user.validate');
+//create update route to update the user
+Route::patch('/validateUser/{user}', [UserController::class, 'update'])->name('user.update');
 
 /*
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

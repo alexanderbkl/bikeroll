@@ -7,6 +7,8 @@ Run commands:
 #$php artisan migrate:refresh?
 #$php artisan migrate --path=/database/migrations/create_courses.php
 php artisan migrate --path=/database/migrations/create_roles.php
+$php artisan migrate --path=/database/migrations/create_sponsors_courses_table.php
+$php artisan migrate --path=/database/migrations/create_sponsors.php
 #$yarn
 #$yarn dev
 

@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        if ($user) {
+            if ($user->paid == 0) {
+                return redirect()->route('user.validate', $user);
+            }
+        }
+
         return view('home');
     }
 }

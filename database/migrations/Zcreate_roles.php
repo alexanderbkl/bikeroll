@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -11,11 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-    /*  $role1 = Role::firstOrCreate(['name' => 'admin']);
-       // $role2 = Role::create(['name' => 'pro']);
-        $user = User::find(1);
-        $user->assignRole($role1);
-        */
+        //create admin role and pro role
+        $adminRole = Role::create(['name' => 'admin']);
+        $proRole = Role::create(['name' => 'pro']);
+
+        
     }
 
     /**

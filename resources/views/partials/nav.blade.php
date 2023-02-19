@@ -27,14 +27,20 @@
                 <a class="nav-link {{ setActive('contact') }}" href="{{ route('contact') }}">Contactar</a>
             </li>
             @role('admin')
-            <li class="nav-item">
-                <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
+                </li>
             @endrole
+
+            @auth
+                <li class="nav-item">
+                    <a class="nav-link {{ setActive('user') }}" href="{{ route('user.index') }}">Profile</a>
+                </li>
+            @endauth
             @role('pro')
-            <li class="nav-item">
-                <a class="nav-link {{ setActive('pro') }}" href="{{ route('contact') }}">PRO</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ setActive('pro') }}" href="{{ route('contact') }}">PRO</a>
+                </li>
             @endrole
             @auth
                 <li class="nav-item">
