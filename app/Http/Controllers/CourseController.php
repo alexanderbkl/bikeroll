@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
+use App\Models\Insurer;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+
 
 class CourseController extends Controller
 {
@@ -274,7 +277,19 @@ class CourseController extends Controller
         $user = Auth::user();
         //attach user to course
         $course->users()->attach($user->id);
-        return redirect()->route('course.show', $course)->with('status', 'Te has inscrito a la carrera con éxito');
+        $insurer = Insurer::where('cif', $user->insurer_cif)->first();
+
+        $pdf = PDF::loadView('course.pdf', [
+            'course' => $course,
+            'insurer' => $insurer
+        ]);
+
+
+
+        //download pdf and redirect to course.show with status
+        return $pdf->download($course->url.'-'.now().'.pdf');
+
+
     }
 
     public function optOut(Course $course) {
