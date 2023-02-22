@@ -49,6 +49,16 @@
             <p class="text-black-50">Se celebra el: {{ date('d/m/Y', strtotime($course->date)) }}</p>
             <div class="d-flex justify-content-between align-items-between">
                 <a href="{{ route('course.index') }}">Atrás</a>
+                <!--Check if course has this user id, if it does, show a button-->
+                @auth
+                    @if (date('Y-m-d', strtotime($course->date)) < date('Y-m-d', strtotime('+30 days')))
+                        @if ($course->users->contains(auth()->user()->id))
+                            <a class="btn btn-primary btn-sm" href="{{ route('course.optOut', $course) }}">Baja</a>
+                        @else
+                            <a class="btn btn-primary btn-sm" href="{{ route('course.signUp', $course) }}">Apuntarse</a>
+                        @endif
+                    @endif
+                @endauth
                 @role('admin')
                     <div class="btn-group btn-group-sm">
                         <a class="btn btn-primary" href="{{ route('course.edit', $course) }}">Editar</a>
@@ -60,6 +70,8 @@
                     </div>
                 @endrole
             </div>
+
         </div>
+
     </div>
 @endsection

@@ -18,4 +18,9 @@ class Course extends Model
     {
         return 'url';
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'courses_users');
+    }
 }

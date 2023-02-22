@@ -19,7 +19,8 @@
                         href="{{ route('course.show', $course) }}">
                         @if ($course->poster_image)
                             <img class="img-thumbnail pointer" width="50"
-                                src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}" alt="sin imagen" />
+                                src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}"
+                                alt="sin imagen" />
                         @else
                             <span>s/i</span>
                         @endif
@@ -32,9 +33,18 @@
                         @else
                             <span class="text-danger">Inactivo</span>
                         @endif
-                        <span class="text-black-50">
+                        <span class="text-black-50">Celebración:
                             {{ date('d/m/Y', strtotime($course->date)) }}
                         </span>
+
+                        <!--if course date is less than 30 days away from now, show button to Apuntarse-->
+                        @auth
+                            @if (date('Y-m-d', strtotime($course->date)) < date('Y-m-d', strtotime('+30 days')))
+                                @if ($course->users->contains(auth()->user()->id))
+                                    <span class="text-success">Apuntado</span>
+                                @endif
+                            @endif
+                        @endauth
                     </a>
                 </li>
             @empty

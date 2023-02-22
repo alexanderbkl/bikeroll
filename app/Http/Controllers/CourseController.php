@@ -6,6 +6,7 @@ use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -266,6 +267,25 @@ class CourseController extends Controller
         }
 
         $course->delete();
-        return redirect()->route('course.index')->with('status', 'La cursa fue eliminada con éxito');
+        return redirect()->route('course.index')->with('status', 'La carrera fue eliminada con éxito, hermano');
+    }
+
+    public function signUp(Course $course) {
+        $user = Auth::user();
+        //attach user to course
+        $course->users()->attach($user->id);
+        return redirect()->route('course.show', $course)->with('status', 'Te has inscrito a la carrera con éxito');
+    }
+
+    public function optOut(Course $course) {
+        $user = Auth::user();
+        //detach user from course
+        $course->users()->detach($user->id);
+        return redirect()->route('course.show', $course)->with('status', 'Te has dado de baja de la carrera con éxito');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'c');
     }
 }

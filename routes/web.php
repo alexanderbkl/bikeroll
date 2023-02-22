@@ -33,6 +33,10 @@ Route::resource('projects', ProjectController::class)
 ->names('projects');
 
 Route::resource('course', CourseController::class)->names('course');
+//route for course.signUp
+Route::get('course/{course}/signUp', [CourseController::class, 'signUp'])->name('course.signUp');
+Route::get('course/{course}/optOut', [CourseController::class, 'optOut'])->name('course.optOut');
+
 Route::resource('insurers', InsurerController::class)->names('insurers');
 
 Route::resource('sponsor', SponsorController::class)->names('sponsor');
