@@ -6,7 +6,6 @@ use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
 use App\Models\Insurer;
 use App\Models\Sponsor;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
