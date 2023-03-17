@@ -173,9 +173,23 @@ class SponsorController extends Controller
 
 
 
+        $price = Price::where(['id' => 1])->first();
+
+        //check if price is null, if it is, create a new price
+        if ($price == null) {
+            $price = Price::create([
+                'id' => 1,
+                'main_plane_sponsorship_price' => 150,
+            ]);
+        }
+        $total_price = $sponsor->courses->where('is_active', true)->where('date', '>', now())->sum('sponsorship_price') + $price->main_plane_sponsorship_price;
+
+
         $pdf = PDF::loadView('sponsor.pdf', [
             'sponsor' => $sponsor,
-            'courses' => $courses
+            'courses' => $courses,
+            'main_plane_sponsorship_price' => $price->main_plane_sponsorship_price,
+            'total_price' => $total_price,
         ]);
 
         return $pdf->download($sponsor->cif.'-'.now().'.pdf');

@@ -14,6 +14,7 @@
     <div class="container mt-5">
         <h2 class="text-center mb-3">Factura patrocinador</h2>
         <h3> Fecha factura {{ now() }} </h3>
+        <p> Precio aparición en el plano principal: {{ $main_plane_sponsorship_price }}€ </p>
         <table class="table table-bordered mb-5">
             <thead>
                 <tr class="table-danger">
@@ -35,8 +36,8 @@
                     <td>{{ $sponsor->name }}</td>
                     <td>{{ $sponsor->cif }}</td>
                     <td>{{ $sponsor->address }}</td>
-                    <!-- Sum all the sponsorship_price of courses that are active and unfinished (is_active and date after current date) -->
-                    <td>{{ $sponsor->courses->where('is_active', true)->where('date', '>', now())->sum('sponsorship_price') }}€</td>
+                    <!-- Sum all the sponsorship_price of courses that are active and unfinished (is_active and date after current date) and add  -->
+                    <td>{{ $total_price }}€</td>
                 </tr>
             </tbody>
         </table>
