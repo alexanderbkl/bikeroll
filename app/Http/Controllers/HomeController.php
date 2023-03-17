@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+     //   $this->middleware('auth');
     }
 
     /**
@@ -30,6 +31,15 @@ class HomeController extends Controller
             }
         }
 
-        return view('home');
+        //list of all Sponsors which have paid
+        $sponsors = Sponsor::where('main_plane', 1)->get();
+
+
+
+        return view('home', [
+            'sponsors' => $sponsors,
+        ]);
+
+
     }
 }

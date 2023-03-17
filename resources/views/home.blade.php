@@ -11,12 +11,26 @@
                 @auth
                     Bienvenido, {{ auth()->user()->name }}
                 @endauth
-                <p class="lead text-secondary">Proyecto realizado para IES La Pineda sobre cursos de bicicleta en Laravel.
+                <p class="lead text-secondary">Carreras de bicicleta en Laravel. Proyecto realizado para IES La Pineda.
                 </p>
                 <div class="d-flex flex-row align-items-center">
-                    <a class="btn btn-lg btn-block btn-primary" href="{{ route('projects.index') }}">Projectes</a>
-                    <a class="btn btn-lg btn-block btn-outline-primary" href="{{ route('contact') }}">Contact</a>
+                    <a class="btn btn-lg btn-block btn-primary" href="{{ route('course.index') }}">Carreras</a>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{{ route('contact') }}">Contactar</a>
                 </div>
+                @if ($sponsors->count() > 0)
+                    <p>Patrocinadores destacados:</p>
+                    @foreach ($sponsors as $sponsor)
+                        @if ($sponsor->is_active)
+                            @if ($sponsor->logo)
+                                <img class="img-thumbnail pointer" width="50"
+                                    src="{{ asset('/uploads/sponsors/logos/' . $sponsor->logo) }}" alt="sin imagen" />
+                            @endif
+                            <a href="{{ route('sponsor.show', $sponsor) }}" target="_blank">{{ $sponsor->name }}</a> <br>
+                        @endif
+                    @endforeach
+                @else
+                    <p>No hay patrocinadores</p>
+                @endif
             </div>
             <div class="col-12 col-lg-6">
                 <img src="{{ asset('img/home.svg') }}" alt="Home" class="img-fluid">

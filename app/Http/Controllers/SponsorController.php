@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveSponsorRequest;
 use App\Models\Course;
+use App\Models\Price;
 use App\Models\Sponsor;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -16,9 +17,20 @@ class SponsorController extends Controller
     {
         //get Sponsor and paginate 5, sortByDesc is_active
         $sponsors = Sponsor::orderBy('is_active', 'desc')->paginate(5);
+        $price = Price::where(['id' => 1])->first();
+
+    //check if price is null, if it is, create a new price
+        if ($price == null) {
+            $price = Price::create([
+                'id' => 1,
+                'main_plane_sponsorship_price' => 150,
+            ]);
+        }
+
 
         return view('sponsor.index', [
-            'sponsors' => $sponsors
+            'sponsors' => $sponsors,
+            'price' => $price
         ]);
     }
 
@@ -167,5 +179,23 @@ class SponsorController extends Controller
         ]);
 
         return $pdf->download($sponsor->cif.'-'.now().'.pdf');
+    }
+
+    public function setprice(Request $request)
+    {
+        $setPrice = $request->price;
+        //set price to prices table, in main_plane_sponsorship_price column
+        //if Price where id is 1 doesn't exist, create it
+
+        $price = Price::where(['id' => 1]);
+
+        //check if price with id 1 exists
+        if ($price) {
+                $price->update(["main_plane_sponsorship_price" => $setPrice]);
+        }
+
+        return redirect()->route('sponsor.index')->with('status', 'Precio patrocinio modificado con éxito.');
+
+
     }
 }

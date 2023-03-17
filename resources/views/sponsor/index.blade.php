@@ -11,6 +11,11 @@
             @endrole
         </div>
         <hr>
+        <form id="sponsorship-price" method="POST" enctype="multipart/form-data" action="{{ route('sponsor.setprice') }}">
+            @csrf
+            <input placeholder="Precio por plano principal" type="number" name="price" value="{{ old('price', $price->main_plane_sponsorship_price) }}">
+            <button type="submit">Actualizar precio plano principal</button>
+        </form>
         <p class="lead text-secondary">Lista de patrocinadores:</p>
         <ul class="list-group">
             @forelse ($sponsors as $sponsor)
@@ -19,8 +24,7 @@
                         href="{{ route('sponsor.show', $sponsor) }}">
                         @if ($sponsor->logo)
                             <img class="img-thumbnail pointer" width="50"
-                                src="{{ asset('/uploads/sponsors/logos/' . $sponsor->logo) }}"
-                                alt="sin imagen" />
+                                src="{{ asset('/uploads/sponsors/logos/' . $sponsor->logo) }}" alt="sin imagen" />
                         @else
                             <span>s/i</span>
                         @endif
