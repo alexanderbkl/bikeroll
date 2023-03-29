@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insurer;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -40,6 +41,11 @@ class UserController extends Controller
         return view('user.validate', ['user' => $user, 'insurers' => $insurers]);
     }
 
+    public function showUsers()
+    {
+        $users = User::all();
+        return view('user.list', ['users' => $users]);
+    }
     public function update(Request $request)
     {
         //update user data

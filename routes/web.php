@@ -51,6 +51,7 @@ Route::post('/sponsor', [SponsorController::class, 'setprice'])->name('sponsor.s
 
 //create a user route that calls index method of the UserController
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/users', [UserController::class, 'showUsers'])->name('user.list');
 //rouote at /validateUser that calls the validateUser method of the UserController
 Route::get('/validateUser', [UserController::class, 'validateUser'])->name('validateUser');
 //create user.validate view route with the user as parameter

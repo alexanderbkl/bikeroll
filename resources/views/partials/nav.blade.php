@@ -28,6 +28,9 @@
             </li>
             @role('admin')
                 <li class="nav-item">
+                    <a class="nav-link {{ setActive('admin') }}" href="{{ route('user.list') }}">Usuarios</a>
+                    </li>
+                <li class="nav-item">
                     <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
                 </li>
             @endrole
