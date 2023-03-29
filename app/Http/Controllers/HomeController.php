@@ -34,7 +34,9 @@ class HomeController extends Controller
         //list of all Sponsors which have paid
         $sponsors = Sponsor::where('main_plane', 1)->get();
         //get only 4 sponsors max
-        $sponsors = $sponsors->random(4);
+        if (count($sponsors) > 4) {
+            $sponsors = $sponsors->random(4);
+        }
 
 
 

@@ -33,7 +33,7 @@
                 @endif
             </div>
             <div class="col-12 col-lg-6">
-                <img src="{{ asset('img/home.svg') }}" alt="Home" class="img-fluid">
+                <img src="{{ asset('img/about.svg') }}" alt="Home" class="img-fluid">
             </div>
         </div>
     </div>
