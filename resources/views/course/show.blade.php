@@ -25,7 +25,34 @@
                 <p class="text-danger">Inactivo</p>
             @endif
             <p class="text-secondary">{{ $course->description }}</p>
-
+            @if ($users->count() > 0)
+                @forelse ($users as $user)
+                    <li class="list-group-item border-0 mb-3 shadow-sm">
+                        <br><br><br>
+                        {!! QrCode::generate($user->id) !!}
+                        <br><br><br>
+                        <span class="font-weight-bold">
+                            {{ $user->name }}
+                        </span>
+                        <!--check if course is_active-->
+                        @if ($user->paid)
+                            <span class="text-success">Pagado</span>
+                            <span class="text-black-50">
+                                Creado el:
+                                {{ $user->created_at->format('d/m/Y') }}
+                            </span>
+                            <span class="text-black-50">
+                                email:
+                                {{ $user->email }}
+                            </span>
+                            </a>
+                        @endif
+                    @empty
+                    <li class="list-group-item border-0 mb-3 shadow-sm">
+                        No hay patrocinadores por el momento</li>
+                    </li>
+                @endforelse
+            @endif
             @if ($sponsors->count() > 0)
                 <p>Patrocinadores:</p>
                 @foreach ($sponsors as $sponsor)

@@ -6,7 +6,6 @@ use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
 use App\Models\Insurer;
 use App\Models\Sponsor;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
@@ -28,9 +27,12 @@ class CourseController extends Controller
 
         $sponsors = $sponsors->sortByDesc('is_active');
 
+        $users = $course->users()->get();
+
         return view('course.show', [
             'course' => $course,
-            'sponsors' => $sponsors
+            'sponsors' => $sponsors,
+            'users' => $users
         ]);
     }
 
