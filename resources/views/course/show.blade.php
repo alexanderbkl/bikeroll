@@ -5,12 +5,13 @@
 @section('content')
     <div class="container">
         <div class="bg-white p-5 shadow rounded">
-            <div class=" d-flex flex-column justify-content-center align-items-center">
+            <div class=" d-flex flex-column justify-content-start align-items-start">
                 <h1>{{ $course->title }}</h1>
                 @if ($course->poster_image)
                     <img role="button" onclick="window.open(this.src);" class="img-thumbnail"
                         src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}" alt="sin imagen" />
                 @endif
+
                 @if ($course->map_image)
                     <h1>Mapa:</h1>
                     <img role="button" onclick="window.open(this.src);" class="img-thumbnail"
@@ -18,6 +19,11 @@
                 @else
                     <p>Sin mapa</p>
                 @endif
+                <p>Elevación: {{ $course->elevation }}</p>
+                <p>Participantes máximos: {{ $course->max_participants }}</p>
+                <p>Distancia: {{ $course->km }} km</p>
+                <p>Start point: {{ $course->start_point }}</p>
+                <p>Precio patrocinio plano principal: {{ $course->sponsorship_price }} €</p>
             </div>
             @if ($course->is_active)
                 <p class="text-success">Activo</p>
