@@ -21,15 +21,12 @@
                 <a class="nav-link {{ setActive('about') }}" href="{{ route('about') }}">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ setActive('projects.*') }}" href="{{ route('projects.index') }}">Projects</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link {{ setActive('contact') }}" href="{{ route('contact') }}">Contactar</a>
             </li>
             @role('admin')
                 <li class="nav-item">
                     <a class="nav-link {{ setActive('admin') }}" href="{{ route('user.list') }}">Usuarios</a>
-                    </li>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>
                 </li>

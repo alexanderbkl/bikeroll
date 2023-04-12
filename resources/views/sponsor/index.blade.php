@@ -13,13 +13,13 @@
         <hr>
         <form id="sponsorship-price" method="POST" enctype="multipart/form-data" action="{{ route('sponsor.setprice') }}">
             @csrf
-            <input placeholder="Precio por plano principal" type="number" name="price" value="{{ old('price', $price->main_plane_sponsorship_price) }}">
+            <input placeholder="Precio por plano principal" type="number" name="price"
+                value="{{ old('price', $price->main_plane_sponsorship_price) }}">
             <button type="submit">Actualizar precio plano principal</button>
         </form>
         <p class="lead text-secondary">Lista de patrocinadores:</p>
         <ul class="list-group">
             @forelse ($sponsors as $sponsor)
-            {!!  QrCode::generate('https://techvblogs.com/blog/generate-qr-code-laravel-8') !!}
                 <li class="list-group-item border-0 mb-3 shadow-sm">
                     <a class="text-decoration-none text-secondary d-flex justify-content-between align-items-center"
                         href="{{ route('sponsor.show', $sponsor) }}">
