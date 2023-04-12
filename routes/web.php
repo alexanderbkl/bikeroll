@@ -47,11 +47,16 @@ Route::resource('sponsor', SponsorController::class)->names('sponsor');
 Route::get('sponsor/{sponsor}/generate', [SponsorController::class, 'generate'])->name('sponsor.generate');
 //sponsor setprice route
 Route::post('/sponsor', [SponsorController::class, 'setprice'])->name('sponsor.setprice');
+//sponsor store route
+Route::post('/sponsor', [SponsorController::class, 'store'])->name('sponsor.store');
 
 
 //create a user route that calls index method of the UserController
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/users', [UserController::class, 'showUsers'])->name('user.list');
+
+Route::get('/course/{course}/generate', [CourseController::class, 'generate'])->name('course.generate');
+
 //rouote at /validateUser that calls the validateUser method of the UserController
 Route::get('/validateUser', [UserController::class, 'validateUser'])->name('validateUser');
 //create user.validate view route with the user as parameter

@@ -31,34 +31,40 @@
                 <p class="text-danger">Inactivo</p>
             @endif
             <p class="text-secondary">{{ $course->description }}</p>
-            @if ($users->count() > 0)
-                @forelse ($users as $user)
-                    <li class="list-group-item border-0 mb-3 shadow-sm">
-                        <br><br><br>
-                        {!! QrCode::generate($user->id) !!}
-                        <br><br><br>
-                        <span class="font-weight-bold">
-                            {{ $user->name }}
-                        </span>
-                        <!--check if course is_active-->
-                        @if ($user->paid)
-                            <span class="text-success">Pagado</span>
-                            <span class="text-black-50">
-                                Creado el:
-                                {{ $user->created_at->format('d/m/Y') }}
+            @role('admin')
+                @if ($users->count() > 0)
+                    <!--button to print users pdf-->
+                    <p>{{ $course->title }}</p>
+                    <a href="{{ route('course.generate', $course) }}" class="btn btn-primary">Imprimir dorsales</a>
+
+                    @forelse ($users as $user)
+                        <li class="list-group-item border-0 mb-3 shadow-sm">
+                            <br><br><br>
+                            {!! QrCode::generate($user->id) !!}
+                            <br><br><br>
+                            <span class="font-weight-bold">
+                                {{ $user->name }}
                             </span>
-                            <span class="text-black-50">
-                                email:
-                                {{ $user->email }}
-                            </span>
-                            </a>
-                        @endif
-                    @empty
-                    <li class="list-group-item border-0 mb-3 shadow-sm">
-                        No hay patrocinadores por el momento</li>
-                    </li>
-                @endforelse
-            @endif
+                            <!--check if course is_active-->
+                            @if ($user->paid)
+                                <span class="text-success">Pagado</span>
+                                <span class="text-black-50">
+                                    Creado el:
+                                    {{ $user->created_at->format('d/m/Y') }}
+                                </span>
+                                <span class="text-black-50">
+                                    email:
+                                    {{ $user->email }}
+                                </span>
+                                </a>
+                            @endif
+                        @empty
+                        <li class="list-group-item border-0 mb-3 shadow-sm">
+                            No hay patrocinadores por el momento</li>
+                        </li>
+                    @endforelse
+                @endif
+            @endrole
             @if ($sponsors->count() > 0)
                 <p>Patrocinadores:</p>
                 @foreach ($sponsors as $sponsor)
@@ -83,15 +89,18 @@
             <div class="d-flex justify-content-between align-items-between">
                 <a href="{{ route('course.index') }}">Atrás</a>
                 <!--Check if course has this user id, if it does, show a button-->
-                @auth
-                    @if (date('Y-m-d', strtotime($course->date)) < date('Y-m-d', strtotime('+30 days')))
+                @if (date('Y-m-d', strtotime($course->date)) < date('Y-m-d', strtotime('+30 days')))
+                    @auth
                         @if ($course->users->contains(auth()->user()->id))
                             <a class="btn btn-primary btn-sm" href="{{ route('course.optOut', $course) }}">Baja</a>
                         @else
                             <a class="btn btn-primary btn-sm" href="{{ route('course.signUp', $course) }}">Apuntarse</a>
                         @endif
-                    @endif
-                @endauth
+                    @else
+                        <a class="btn btn-primary btn-sm" href="{{ route('login') }}">Apuntarse</a>
+                    @endauth
+
+                @endif
                 @role('admin')
                     <div class="btn-group btn-group-sm">
                         <a class="btn btn-primary" href="{{ route('course.edit', $course) }}">Editar</a>

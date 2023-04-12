@@ -6,8 +6,10 @@ use App\Http\Requests\SaveCourseRequest;
 use App\Models\Course;
 use App\Models\Insurer;
 use App\Models\Sponsor;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class CourseController extends Controller
@@ -276,8 +278,15 @@ class CourseController extends Controller
     }
 
     public function signUp(Course $course) {
-        $user = Auth::user();
-        //attach user to course
+        //if authorised:
+            if (Auth::check()) {
+                $user = Auth::user();
+                //attach user to course
+            } else {
+                //redirect to login
+                return redirect()->route('login');
+            }
+
         $course->users()->attach($user->id);
         $insurer = Insurer::where('cif', $user->insurer_cif)->first();
 
@@ -292,6 +301,29 @@ class CourseController extends Controller
         return $pdf->download($course->url.'-'.now().'.pdf');
 
 
+    }
+
+
+    //users array in generate function
+    public function generate(Course $course)
+    {
+        $users = $course->users;
+        //check if role is admin
+       $role = Auth::user()->roles;
+        //check if at least one role is admin
+        if (!$role->contains('name', 'admin')) {
+            return redirect()->route('sponsor.index')->with('status', 'No tienes permiso para acceder a esta página');
+        }
+
+
+
+        $pdf = PDF::loadView('course.qrpdf', [
+            'users' => $users,
+        ]);
+
+        return view('course.qrpdf', ['users' => $users]);
+
+       // return $pdf->download(now().'.pdf');
     }
 
     public function optOut(Course $course) {
