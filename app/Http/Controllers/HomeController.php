@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
@@ -38,10 +39,20 @@ class HomeController extends Controller
             $sponsors = $sponsors->random(4);
         }
 
+        //get 4 courses
+        $courses = Course::where('is_active', 1)->get();
+
+        if (count($courses) > 4) {
+            $courses = $courses->random(4);
+        }
+
+
+
 
 
         return view('home', [
             'sponsors' => $sponsors,
+            'courses' => $courses
         ]);
 
 

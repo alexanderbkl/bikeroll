@@ -31,6 +31,20 @@
                 @else
                     <p>No hay patrocinadores</p>
                 @endif
+                <!--si hay courses, mostrarlos-->
+                @if ($courses->count() > 0)
+                    <p>Carreras destacadas:</p>
+                    @foreach ($courses as $course)
+                        @if ($course->is_active)
+                            <img class="img-thumbnail pointer" width="50"
+                                src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}"
+                                alt="sin imagen" />
+                            <a href="{{ route('course.show', $course) }}" target="_blank"> {{ $course->title }}</a> <br>
+                        @endif
+                    @endforeach
+                @else
+                    <p>No hay carreras</p>
+                @endif
             </div>
             <div class="col-12 col-lg-6">
                 <img src="{{ asset('img/about.svg') }}" alt="Home" class="img-fluid">

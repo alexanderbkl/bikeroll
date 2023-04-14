@@ -25,7 +25,7 @@
             </li>
             @role('admin')
                 <li class="nav-item">
-                    <a class="nav-link {{ setActive('admin') }}" href="{{ route('user.list') }}">Usuarios</a>
+                    <a class="nav-link {{ setActive('user.*') }}" href="{{ route('user.list') }}">Usuarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ setActive('admin') }}" href="{{ route('admin') }}">Admin</a>

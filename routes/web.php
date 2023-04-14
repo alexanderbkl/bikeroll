@@ -26,7 +26,7 @@ use App\Http\Controllers\UserController;
 //if there is user, redirect to validateUser, if not, redirect to login
 Route::get('/', [UserController::class, 'validateUser'])->name('validateUser');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //home index
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 Route::view('/about', 'about')->name('about');
@@ -46,7 +46,7 @@ Route::resource('sponsor', SponsorController::class)->names('sponsor');
 /*Create a sponsor.generate route to generate a PDF bill*/
 Route::get('sponsor/{sponsor}/generate', [SponsorController::class, 'generate'])->name('sponsor.generate');
 //sponsor setprice route
-Route::post('/sponsor', [SponsorController::class, 'setprice'])->name('sponsor.setprice');
+Route::post('/sponsor/setprice', [SponsorController::class, 'setprice'])->name('sponsor.setprice');
 //sponsor store route
 Route::post('/sponsor', [SponsorController::class, 'store'])->name('sponsor.store');
 

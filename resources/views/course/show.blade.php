@@ -97,7 +97,7 @@
                             <a class="btn btn-primary btn-sm" href="{{ route('course.signUp', $course) }}">Apuntarse</a>
                         @endif
                     @else
-                        <a class="btn btn-primary btn-sm" href="{{ route('login') }}">Apuntarse</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('register') }}">Apuntarse</a>
                     @endauth
 
                 @endif
