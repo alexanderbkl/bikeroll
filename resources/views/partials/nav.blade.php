@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md bg-white shadow-sm px-3">
-    <a href="{{ route('home.index') }}" class="navbar-brand">{{ config('app.name') }}</a>
+    <a href="{{ route('home') }}" class="navbar-brand">{{ config('app.name') }}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link {{ setActive('home') }}" href="{{ route('home.index') }}">Home</a>
+                <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ setActive('course.*') }}" href="{{ route('course.index') }}">Carreras</a>
@@ -34,7 +34,7 @@
 
             @auth
                 <li class="nav-item">
-                    <a class="nav-link {{ setActive('user') }}" href="{{ route('user.index') }}">Profile</a>
+                    <a class="nav-link {{ setActive('user.*') }}" href="{{ route('user.index') }}">Profile</a>
                 </li>
             @endauth
             @role('pro')

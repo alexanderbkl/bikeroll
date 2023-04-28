@@ -26,9 +26,9 @@ use App\Http\Controllers\UserController;
 //if there is user, redirect to validateUser, if not, redirect to login
 Route::get('/', [UserController::class, 'validateUser'])->name('validateUser');
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 //home index
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 
 Route::resource('projects', ProjectController::class)

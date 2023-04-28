@@ -15,11 +15,13 @@ return new class extends Migration
      */
     public function up()
     {
+        
+
         //create admin role and pro role
         $adminRole = Role::create(['name' => 'admin']);
         $proRole = Role::create(['name' => 'pro']);
 
-        
+
     }
 
     /**

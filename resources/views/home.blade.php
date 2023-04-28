@@ -39,7 +39,10 @@
                             <img class="img-thumbnail pointer" width="50"
                                 src="{{ asset('/uploads/courses/posterimages/' . $course->poster_image) }}"
                                 alt="sin imagen" />
-                            <a href="{{ route('course.show', $course) }}" target="_blank"> {{ $course->title }}</a> <br>
+                            <a href="{{ route('course.show', $course) }}" target="_blank"> {{ $course->title }}</a>
+                            <p> <span class="text-black-50">Celebración:
+                                    {{ date('d/m/Y', strtotime($course->date)) }}
+                                </span></p><br>
                         @endif
                     @endforeach
                 @else
